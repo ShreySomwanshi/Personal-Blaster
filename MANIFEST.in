@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include personal_blaster *.css
+recursive-include personal_blaster *.csv
+recursive-include personal_blaster *.html
+recursive-include personal_blaster *.ico
+recursive-include personal_blaster *.js
+recursive-include personal_blaster *.json
+recursive-include personal_blaster *.md
+recursive-include personal_blaster *.png
+recursive-include personal_blaster *.py
+recursive-include personal_blaster *.svg
+recursive-include personal_blaster *.txt
+recursive-exclude personal_blaster *.pyc
