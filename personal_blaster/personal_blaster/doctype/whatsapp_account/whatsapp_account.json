@@ -1,0 +1,40 @@
+{
+ "actions": [],
+ "autoname": "field:acc_name",
+ "creation": "2022-11-28 00:45:06.320792",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "acc_name",
+  "access_token"
+ ],
+ "fields": [
+  {
+   "fieldname": "acc_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Account Name ",
+   "unique": 1
+  },
+  {
+   "fieldname": "access_token",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Channel ID"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-12-15 19:38:19.896748",
+ "modified_by": "Administrator",
+ "module": "Personal Blaster",
+ "name": "Whatsapp Account",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

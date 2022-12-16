@@ -1,0 +1,168 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-11-24 18:59:34.051763",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_name",
+  "contact_status",
+  "phone",
+  "mobile_no",
+  "email_id",
+  "address_column",
+  "add_1",
+  "add_2",
+  "city",
+  "state",
+  "country",
+  "pincode",
+  "contact_details_section",
+  "phone_nos",
+  "email_ids",
+  "interests",
+  "messages_section",
+  "whatsapp_messages",
+  "sms_messages"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "contact_details_section",
+   "fieldtype": "Section Break",
+   "label": "Contact Details"
+  },
+  {
+   "fieldname": "phone_nos",
+   "fieldtype": "Table",
+   "label": "Contact Numbers",
+   "options": "Contact Phone"
+  },
+  {
+   "fieldname": "email_ids",
+   "fieldtype": "Table",
+   "label": "Email IDs",
+   "options": "Contact Email"
+  },
+  {
+   "fieldname": "interests",
+   "fieldtype": "Table",
+   "label": "Interests",
+   "options": "Interests"
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Data",
+   "label": "Mobile no",
+   "read_only": 1
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "address_column",
+   "fieldtype": "Column Break",
+   "label": "Address"
+  },
+  {
+   "fieldname": "add_1",
+   "fieldtype": "Data",
+   "label": "Address line no 1"
+  },
+  {
+   "fieldname": "add_2",
+   "fieldtype": "Data",
+   "label": "Address line no 2"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "City"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "messages_section",
+   "fieldtype": "Section Break",
+   "label": "Messages"
+  },
+  {
+   "fieldname": "whatsapp_messages",
+   "fieldtype": "Table",
+   "label": "Whatsapp Messages",
+   "options": "Whatsapp Messages",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sms_messages",
+   "fieldtype": "Table",
+   "label": "SMS Messages",
+   "options": "SMS Messages",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "label": "Postal code"
+  },
+  {
+   "default": "NOT UPLOADED",
+   "fieldname": "contact_status",
+   "fieldtype": "Select",
+   "label": "Upload status",
+   "options": "NOT UPLOADED\nUPLOADED\nERROR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone no",
+   "read_only": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State/Province"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-12-15 23:24:28.267362",
+ "modified_by": "Administrator",
+ "module": "Personal Blaster",
+ "name": "Client",
+ "name_case": "Title Case",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

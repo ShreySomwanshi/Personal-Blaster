@@ -1,0 +1,165 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:title",
+ "creation": "2022-09-09 16:53:19.644588",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "message_template",
+  "msg_sender",
+  "campaign_for",
+  "msg_to",
+  "scheduled_time",
+  "post_status",
+  "column_break_7",
+  "campaign_status_section",
+  "msg_sent",
+  "msg_delivered",
+  "msg_read",
+  "column_break_14",
+  "msg_accepted",
+  "msg_transmitted",
+  "msg_pending",
+  "column_break_16",
+  "msg_failed",
+  "msg_rejected",
+  "msg_total"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "unique": 1
+  },
+  {
+   "fieldname": "message_template",
+   "fieldtype": "Link",
+   "label": "Message Template",
+   "options": "Whatsapp Template"
+  },
+  {
+   "fieldname": "msg_sender",
+   "fieldtype": "Link",
+   "label": "Sender",
+   "options": "Whatsapp Account"
+  },
+  {
+   "fieldname": "msg_to",
+   "fieldtype": "Dynamic Link",
+   "label": "Recipient",
+   "options": "campaign_for"
+  },
+  {
+   "fieldname": "scheduled_time",
+   "fieldtype": "Datetime",
+   "label": "Schedule To"
+  },
+  {
+   "fieldname": "post_status",
+   "fieldtype": "Select",
+   "label": "Post Status",
+   "options": "\nScheduled\nPosted\nError",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "campaign_status_section",
+   "fieldtype": "Section Break",
+   "label": "Campaign Status"
+  },
+  {
+   "fieldname": "msg_sent",
+   "fieldtype": "Data",
+   "label": "Sent"
+  },
+  {
+   "fieldname": "msg_delivered",
+   "fieldtype": "Data",
+   "label": "Delivered"
+  },
+  {
+   "fieldname": "msg_read",
+   "fieldtype": "Data",
+   "label": "Read"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "msg_accepted",
+   "fieldtype": "Data",
+   "label": "Accepted"
+  },
+  {
+   "fieldname": "msg_transmitted",
+   "fieldtype": "Data",
+   "label": "Transmitted"
+  },
+  {
+   "fieldname": "msg_pending",
+   "fieldtype": "Data",
+   "label": "Pending"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "msg_failed",
+   "fieldtype": "Data",
+   "label": "Failed"
+  },
+  {
+   "fieldname": "msg_rejected",
+   "fieldtype": "Data",
+   "label": "Rejected"
+  },
+  {
+   "fieldname": "msg_total",
+   "fieldtype": "Data",
+   "label": "Total"
+  },
+  {
+   "default": "Client Group",
+   "fieldname": "campaign_for",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Whatsapp Campaign for",
+   "options": "Client\nClient Group"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-12-15 19:36:33.327380",
+ "modified_by": "Administrator",
+ "module": "Personal Blaster",
+ "name": "Whatsapp Post",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

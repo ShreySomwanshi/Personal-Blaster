@@ -1,0 +1,31 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-09-08 19:28:46.372099",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "contacts"
+ ],
+ "fields": [
+  {
+   "fieldname": "contacts",
+   "fieldtype": "Link",
+   "label": "Contacts",
+   "options": "Client"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-27 20:27:46.180768",
+ "modified_by": "Administrator",
+ "module": "Personal Blaster",
+ "name": "Contact Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

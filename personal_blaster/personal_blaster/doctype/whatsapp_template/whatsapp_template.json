@@ -1,0 +1,97 @@
+{
+ "actions": [],
+ "autoname": "field:temp_name",
+ "creation": "2022-09-05 20:26:13.791637",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "temp_name",
+  "message",
+  "temp_status",
+  "field_list",
+  "column_break_4",
+  "button",
+  "button_1",
+  "button_2"
+ ],
+ "fields": [
+  {
+   "fieldname": "temp_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Temp Name",
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "message",
+   "fieldtype": "Text",
+   "label": "Template",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "temp_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nPending\nApproved\nDeleted\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "button",
+   "fieldtype": "Check",
+   "label": "Button"
+  },
+  {
+   "depends_on": "eval:doc.button==1",
+   "fieldname": "button_1",
+   "fieldtype": "Data",
+   "label": "First Button ",
+   "mandatory_depends_on": "eval:doc.button==1"
+  },
+  {
+   "depends_on": "eval:doc.button==1",
+   "fieldname": "button_2",
+   "fieldtype": "Data",
+   "label": "Second Button",
+   "mandatory_depends_on": "eval:doc.button==1"
+  },
+  {
+   "fieldname": "field_list",
+   "fieldtype": "Table",
+   "label": "Fields",
+   "options": "Whatsapp Placeholder"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-12-07 22:49:56.303459",
+ "modified_by": "Administrator",
+ "module": "Personal Blaster",
+ "name": "Whatsapp Template",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

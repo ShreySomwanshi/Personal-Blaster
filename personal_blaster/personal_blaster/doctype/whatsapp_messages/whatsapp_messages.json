@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:message_id",
+ "creation": "2022-10-20 00:37:00.142523",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "message_text",
+  "message_id",
+  "contact_id",
+  "status",
+  "status_update_time",
+  "error",
+  "campaign",
+  "sent_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "message_text",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Message Text",
+   "options": "Whatsapp Template"
+  },
+  {
+   "fieldname": "message_id",
+   "fieldtype": "Data",
+   "label": "Message ID",
+   "unique": 1
+  },
+  {
+   "fieldname": "contact_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Contact ID"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Status"
+  },
+  {
+   "fieldname": "status_update_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Status Update Time "
+  },
+  {
+   "fieldname": "error",
+   "fieldtype": "Text",
+   "label": "Error",
+   "read_only": 1
+  },
+  {
+   "fieldname": "campaign",
+   "fieldtype": "Data",
+   "label": "campaign"
+  },
+  {
+   "fieldname": "sent_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Sent time"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-26 17:36:18.690289",
+ "modified_by": "Administrator",
+ "module": "Personal Blaster",
+ "name": "Whatsapp Messages",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

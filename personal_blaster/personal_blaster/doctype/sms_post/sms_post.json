@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:title",
+ "creation": "2022-10-17 21:01:00.199503",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "sms_text",
+  "msg_to",
+  "scheduled_time",
+  "post_status",
+  "campaign_status_section",
+  "sms_sent",
+  "sms_delivered",
+  "sms_pending",
+  "sms_not_delivered",
+  "total_sms"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "unique": 1
+  },
+  {
+   "fieldname": "sms_text",
+   "fieldtype": "Text",
+   "label": "Text"
+  },
+  {
+   "fieldname": "msg_to",
+   "fieldtype": "Link",
+   "label": "Send To",
+   "options": "Client Group"
+  },
+  {
+   "fieldname": "scheduled_time",
+   "fieldtype": "Datetime",
+   "label": "Scheduled To"
+  },
+  {
+   "fieldname": "post_status",
+   "fieldtype": "Select",
+   "label": "Post Status",
+   "options": "\nScheduled\nPosted\nError",
+   "read_only": 1
+  },
+  {
+   "fieldname": "campaign_status_section",
+   "fieldtype": "Section Break",
+   "label": "Campaign Status"
+  },
+  {
+   "fieldname": "sms_sent",
+   "fieldtype": "Data",
+   "label": "Sent"
+  },
+  {
+   "fieldname": "sms_delivered",
+   "fieldtype": "Data",
+   "label": "Delivered"
+  },
+  {
+   "fieldname": "sms_pending",
+   "fieldtype": "Data",
+   "label": "Pending"
+  },
+  {
+   "fieldname": "sms_not_delivered",
+   "fieldtype": "Data",
+   "label": "Not delivered"
+  },
+  {
+   "fieldname": "total_sms",
+   "fieldtype": "Data",
+   "label": "Total"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-12-07 16:20:31.378217",
+ "modified_by": "Administrator",
+ "module": "Personal Blaster",
+ "name": "SMS Post",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

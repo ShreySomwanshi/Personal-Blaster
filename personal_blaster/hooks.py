@@ -113,9 +113,10 @@ app_license = "MIT"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+#scheduler_events = {
 #	"all": [
 #		"personal_blaster.tasks.all"
+#		"personal_blaster.personal_blaster.doctype.social_post.social_post.process_scheduled_social_media_posts",
 #	],
 #	"daily": [
 #		"personal_blaster.tasks.daily"
@@ -129,7 +130,7 @@ app_license = "MIT"
 #	"monthly": [
 #		"personal_blaster.tasks.monthly"
 #	],
-# }
+#}
 
 # Testing
 # -------

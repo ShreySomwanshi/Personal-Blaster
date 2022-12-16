@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:sms_id",
+ "creation": "2022-10-21 14:47:06.046801",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sms_id",
+  "sms_body",
+  "sms_status",
+  "sms_status_update_time",
+  "sms_error",
+  "campaign",
+  "sms_sent_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "sms_id",
+   "fieldtype": "Data",
+   "label": "SMS ID",
+   "unique": 1
+  },
+  {
+   "fieldname": "sms_body",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "SMS text"
+  },
+  {
+   "fieldname": "sms_status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Status"
+  },
+  {
+   "fieldname": "sms_status_update_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Status Update Time"
+  },
+  {
+   "fieldname": "sms_error",
+   "fieldtype": "Data",
+   "label": "Error"
+  },
+  {
+   "fieldname": "campaign",
+   "fieldtype": "Data",
+   "label": "campaign"
+  },
+  {
+   "fieldname": "sms_sent_time",
+   "fieldtype": "Datetime",
+   "label": "Sent Time"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-26 17:36:04.675963",
+ "modified_by": "Administrator",
+ "module": "Personal Blaster",
+ "name": "SMS Messages",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

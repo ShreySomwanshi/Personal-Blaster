@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:title",
+ "creation": "2022-11-28 17:03:51.670356",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "interest",
+  "city",
+  "country",
+  "client_members_section",
+  "clients"
+ ],
+ "fields": [
+  {
+   "fieldname": "interest",
+   "fieldtype": "Link",
+   "label": "Interest",
+   "options": "Client Interest"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "City"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "client_members_section",
+   "fieldtype": "Section Break",
+   "label": "Client Members"
+  },
+  {
+   "fieldname": "clients",
+   "fieldtype": "Table",
+   "label": "Clients",
+   "options": "Client Member"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "unique": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-12-01 22:22:12.764127",
+ "modified_by": "Administrator",
+ "module": "Personal Blaster",
+ "name": "Client Group",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
