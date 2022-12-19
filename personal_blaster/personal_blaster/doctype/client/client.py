@@ -1,6 +1,7 @@
 # Copyright (c) 2022, Novacept and contributors
 # For license information, please see license.txt
 
+from frappe import _
 import frappe
 from frappe.model.document import Document
 from frappe.model.naming import append_number_if_name_exists
@@ -96,4 +97,70 @@ class Client(Document):
 
 
 #	Syncing Contact to messagebird
+	@frappe.whitelist()
+	def upload_all_contacts(self):
 
+		unuploaded_client_list = frappe.get_list('Client',filters={'contact_status':'NOT UPLOADED'},as_list=1)
+
+
+		for i in range(len(unuploaded_client_list)):
+			try:
+
+#				contact = frappe.get_doc('Customer',contact_list[i])
+#				token_doc = frappe.get_doc('Whatsapp Setting')
+#				token = token_doc.get_password('access_token')
+
+				client_doc = frappe.get_doc('Client',unuploaded_client_list[i][0])
+				number_id = client_doc.upload_to_messagebird()
+
+#				id_data = self.upload_to_messagebird(contact.mobile_no,contact.customer_name,token)
+				number_id = json.loads(number_id)['id']
+#				if number_id:
+#					client_doc.contact_status = 'UPLOADED'
+#				else:
+#					client_doc.contact_status = 'ERROR'
+#				client_doc.save()
+#				new = frappe.new_doc('Sync contact')
+#				print(new)
+#				new.customer = contact_list[i]
+#				new.customer_id = number_id
+				print(number_id)
+				print(client_doc.name)
+				print(client_doc.contact_status)
+#				new.insert()
+				print('end')
+#				frappe.db.commit()
+			except:
+				pass
+
+	@frappe.whitelist()
+	def upload_to_messagebird(self):
+		token_doc = frappe.get_doc('Whatsapp Setting')
+		token = token_doc.get_password('access_token')
+		if not token:
+			frappe.throw(_('Access token is not Configured'))
+		url = "https://rest.messagebird.com/contacts"
+
+		payload=f'msisdn={self.mobile_no}&firstName={self.customer_name}'
+		headers = {
+		  'Authorization': f'AccessKey {token}',
+		  'Content-Type': 'application/x-www-form-urlencoded'
+		}
+
+		response = requests.request("POST", url, headers=headers, data=payload)
+		print(response.text)
+		number_id = json.loads(response.text)['id']
+		if number_id:
+			self.contact_status = 'UPLOADED'
+			frappe.msgprint(_('Contact Uploaded successfully'))
+		else:
+			self.contact_status = 'ERROR'
+			frappe.msgprint(_('Error in uploading contact'))
+
+		self.save()
+
+		#print(headers)
+
+
+
+		return response.text
