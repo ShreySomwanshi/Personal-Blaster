@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Personal Blaster</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Client\",\"col\":3}},{\"type\":\"card\",\"data\":{\"card_name\":\"Whatsapp\",\"col\":3}},{\"type\":\"card\",\"data\":{\"card_name\":\"Emai Post\",\"col\":3}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Personal Blaster</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Client\",\"col\":3}},{\"type\":\"card\",\"data\":{\"card_name\":\"Whatsapp\",\"col\":3}},{\"type\":\"card\",\"data\":{\"card_name\":\"Email Post\",\"col\":3}}]",
  "creation": "2022-12-01 22:09:07.000540",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -129,7 +129,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Emai Post",
+   "label": "Email Post",
    "link_count": 4,
    "onboard": 0,
    "type": "Card Break"
@@ -175,7 +175,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-12-02 22:32:11.708610",
+ "modified": "2022-12-23 17:42:31.151982",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Personal Blaster",
