@@ -5,7 +5,8 @@ from frappe import _
 import frappe
 from frappe.model.document import Document
 from frappe.model.naming import append_number_if_name_exists
-
+import requests
+import json
 class Client(Document):
 	def autoname(self):
 		self.name = self.customer_name
@@ -149,7 +150,10 @@ class Client(Document):
 
 		response = requests.request("POST", url, headers=headers, data=payload)
 		print(response.text)
-		number_id = json.loads(response.text)['id']
+		try:
+			number_id = json.loads(response.text)['id']
+		except:
+			pass
 		if number_id:
 			self.contact_status = 'UPLOADED'
 			frappe.msgprint(_('Contact Uploaded successfully'))

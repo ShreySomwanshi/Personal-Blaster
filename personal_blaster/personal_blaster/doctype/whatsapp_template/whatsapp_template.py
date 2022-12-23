@@ -100,6 +100,8 @@ class WhatsappTemplate(Document):
 #			'Content-Type': 'application/json'
 #		}
 
+
+		print(payload)
 		response = requests.request("POST", url, headers=headers, data=payload)
 
 		return response.text
@@ -112,12 +114,14 @@ class WhatsappTemplate(Document):
 	def api_body(self):
 		body_list = []
 		message = {"type": "BODY","text": self.message}
-		if frappe.db.get_list('Whatsapp Placeholder',filters={"parent":self.name},fields=["field_example"],as_list = 1):
-			example_tuple = frappe.db.get_list('Whatsapp Placeholder',filters={"parent":self.name},fields=["field_example"],as_list = 1)
+		if self.field_list:
+
+#			example_tuple = frappe.db.get_list('Whatsapp Placeholder',filters={"parent":self.name},fields=["field_example"],as_list = 1)
+
 			example_list = []
 			examples = []
-			for value in range(len(example_tuple)):
-				example_list.append(example_tuple[value][0])
+			for entry in self.field_list:
+				example_list.append(entry.field_example)
 			examples.append(example_list)
 			example_dict = {"example":{"body_text": examples}}
 			message.update(example_dict)
@@ -194,13 +198,19 @@ class WhatsappTemplate(Document):
 		if len(integers) != len(place_values):
 			frappe.throw(_('There should be equal placeholders and field values'))
 
-		fields = frappe.db.get_list('Whatsapp Placeholder',filters={"parent":self.name},fields=["field"],as_list = 1)
+#		fields = frappe.db.get_list('Whatsapp Placeholder',filters={"parent":self.name},fields=["field"],as_list = 1)
+#		print('Test2')
 		doc = frappe.get_last_doc('Client')
-		for i in range(len(fields)):
+#		print('FIELD')
+#		print(fields)
+		for entry in self.field_list:
+
+
+#		for i in range(len(fields)):
 			try:
-				values = frappe.get_value('Client',doc,fields[i][0])
+				values = frappe.db.get_value('Client',doc.name,entry.field)
 			except:
-				frappe.throw(_(f"Client document has no value called {fields[i][0]}"))
+				frappe.throw(_(f"Client document has no value called {entry.field}"))
 
 	@frappe.whitelist()
 	def print_msg(self):

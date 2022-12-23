@@ -50,9 +50,9 @@ class WhatsappPost(Document):
 
 		client_table = frappe.get_doc('Client Group',self.msg_to)
 		print('loop')
-		for entry in client_table:
+		for entry in client_table.clients:
 			print('loop0')
-			client = frappe.get_doc('Client',entry)
+			client = frappe.get_doc('Client',entry.client_member)
 			number = client.mobile_no
 			if not number or client.contact_status != 'UPLOADED':
 				continue
@@ -60,7 +60,7 @@ class WhatsappPost(Document):
 			print(number)
 			response = self.post(messagebird_token,whatsapp_token,message,number,client)
 			response = json.loads(response)
-
+			print(response)
 			#Creating message
 
 #			doc = frappe.new_doc('Message')
@@ -77,9 +77,9 @@ class WhatsappPost(Document):
 #			date_time_format = date_time.strftime("%d-%m-%Y %H:%M:%S")
 			#Linking Message to Contact
 
-			doc = frappe.get_doc('Sync contact',frappe.get_doc('Contact Group Member',entry.get('contacts')).contact)
-			doc.append("message",{"status_update_time":frappe.utils.now_datetime(),"status":response["status"].upper(),"campaign":self.name,"sent_time":frappe.utils.now_datetime(),"message_text": message,"message_id":response['id'],"contact_id":frappe.get_doc('Sync contact',frappe.get_doc('Contact Group Member',entry.get('contacts')).contact).customer_id})
-			doc.save()
+#			doc = frappe.get_doc('Sync contact',frappe.get_doc('Contact Group Member',entry.get('contacts')).contact)
+			client.append("whatsapp_messages",{"status_update_time":frappe.utils.now_datetime(),"status":response["status"].upper(),"campaign":self.name,"sent_time":frappe.utils.now_datetime(),"message_text": message,"message_id":response['id']})
+			client.save()
 
 		frappe.db.set_value("Whatsapp Post",self.name,"post_status",'Posted')
 		frappe.db.commit()
@@ -117,7 +117,7 @@ class WhatsappPost(Document):
 			return hsm_body
 		param_list = []
 		for i in range(len(placeholders)):
-			param_list.append({"default":frappe.get_value('Client',client,placeholders[i][0])})
+			param_list.append({"default":frappe.get_value('Client',client.name,placeholders[i][0])})
 		params = {"params":param_list}
 		hsm_body.update(params)
 		return hsm_body

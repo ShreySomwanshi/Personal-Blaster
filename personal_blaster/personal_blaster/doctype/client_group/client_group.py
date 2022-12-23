@@ -6,7 +6,9 @@ from frappe.model.document import Document
 
 class ClientGroup(Document):
 
-
+	def validate(self):
+		if not self.interest and not self.city and not self.country:
+			frappe.throw(_('All fields cannot be empty'))
 
 	@frappe.whitelist()
 	def filter(self):

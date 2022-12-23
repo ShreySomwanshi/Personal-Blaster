@@ -34,6 +34,7 @@
   {
    "fieldname": "temp_status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "\nPending\nApproved\nDeleted\nRejected",
    "read_only": 1
@@ -71,7 +72,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-07 22:49:56.303459",
+ "modified": "2022-12-22 21:40:19.398006",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Whatsapp Template",
