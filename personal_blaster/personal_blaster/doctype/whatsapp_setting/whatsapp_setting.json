@@ -39,7 +39,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-12-15 19:38:06.071271",
+ "modified": "2022-12-27 18:23:05.035333",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Whatsapp Setting",
@@ -53,6 +53,16 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Whatsapp Master",
    "share": 1,
    "write": 1
   }

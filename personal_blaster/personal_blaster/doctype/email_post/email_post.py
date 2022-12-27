@@ -73,11 +73,11 @@ class EmailPost(Document):
 		end_date = getdate(self.end_date)
 		today_date = getdate(today())
 		if start_date > today_date:
-			self.status = "Scheduled"
+			self.db_set("status", "Scheduled")
 		elif end_date >= today_date:
-			self.status = "In Progress"
+			self.db_set("status","In Progress")
 		elif end_date < today_date:
-			self.status = "Completed"
+			self.db_set("status","Completed")
 
 	def update_post_status(self):
 		frappe.db.set_value("Email Post",self.name,"last_post_time",frappe.utils.now_datetime())
@@ -176,6 +176,10 @@ def unsubscribe_recipient(unsubscribe, method):
 # called through hooks to update email campaign status daily
 def set_email_campaign_status():
 	email_post = frappe.get_all("Email Post", filters={"status": ("!=", "Unsubscribed")})
+	print(email_post)
 	for entry in email_post:
 		email_camp = frappe.get_doc("Email Post", entry.name)
+		print(email_camp.name)
+		print(email_camp.status)
 		email_camp.update_status()
+		print(email_camp.status)

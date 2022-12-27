@@ -171,7 +171,7 @@ class Client(Document):
 		return response.text
 
 @frappe.whitelist()
-def upload_all_contacts(self):
+def upload_all_contacts():
 
 	unuploaded_client_list = frappe.get_list('Client',filters={'contact_status':'NOT UPLOADED'},as_list=1)
 

@@ -4,7 +4,7 @@
 import frappe
 import requests
 import json
-from datetime import datetime
+import datetime
 #from frappe.model.document import Document
 
 #class WhatsappPost(Document):
@@ -14,7 +14,7 @@ from frappe.model.document import Document
 class WhatsappPost(Document):
 	def validate(self):
 		if self.scheduled_time and self.post_status != 'Posted':
-			current_time = frappe.utils.now_datetime()
+			current_time = frappe.utils.now_datetime() - datetime.timedelta(minutes=1)
 			scheduled_time = frappe.utils.get_datetime(self.scheduled_time)
 			if scheduled_time < current_time:
 				frappe.throw(("Scheduled Time must be future time."))
@@ -143,14 +143,24 @@ class WhatsappPost(Document):
 def process_scheduled_whatsapp_message():
 	posts = frappe.get_list(
 		"Whatsapp Post",
-		filters={"post_status": "Scheduled", "docstatus": 1},
+		filters={"post_status": "Scheduled"},
 		fields=["name", "scheduled_time"],
 	)
-	start = frappe.utils.now_datetime()
-	end = start + datetime.timedelta(minutes=10)
+	print(posts)
+	start = frappe.utils.now_datetime() - datetime.timedelta(minutes=10)
+	end = frappe.utils.now_datetime() + datetime.timedelta(minutes=10)
 	for post in posts:
+
 		if post.scheduled_time:
+			print(post)
 			post_time = frappe.utils.get_datetime(post.scheduled_time)
+			print(type(post_time))
+			print(type(start))
+			print(type(end))
 			if post_time > start and post_time <= end:
+				print('time pass')
 				whatsapp_post = frappe.get_doc("Whatsapp Post", post.name)
+				print(whatsapp_post.name)
 				whatsapp_post.message_post()
+			else:
+				return post_time,start,end

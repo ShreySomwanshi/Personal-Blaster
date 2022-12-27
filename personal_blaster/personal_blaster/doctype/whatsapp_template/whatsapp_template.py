@@ -21,6 +21,7 @@ class WhatsappTemplate(Document):
 		if not frappe.db.get_single_value('Whatsapp Setting','access_token'):
 			frappe.throw(_('Setup Whatsapp Configuration to create Template'))
 
+		self.name_validation()
 		self.validate_placeholder()
 		global status
 		status = ''
@@ -30,6 +31,14 @@ class WhatsappTemplate(Document):
 			pass
 		else:
 			frappe.throw(_("Something is incorrect with 'Whatsapp Setting'"))
+
+
+	def name_validation(self):
+		name = self.temp_name
+		syntax = r"(?:[a-z]|[0-9]|[_])+"
+		result = re.findall(syntax,name)
+		if len(result) >0 or result[0] != name:
+			frappe.throw(_("Name should contain lowercase letters, numbers and underscores only"))
 
 	def get_status(self):
 
