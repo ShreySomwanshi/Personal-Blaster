@@ -113,11 +113,16 @@ app_license = "MIT"
 # Scheduled Tasks
 # ---------------
 
-#scheduler_events = {
-#	"all": [
+scheduler_events = {
+	"all": [
 #		"personal_blaster.tasks.all"
 #		"personal_blaster.personal_blaster.doctype.social_post.social_post.process_scheduled_social_media_posts",
-#	],
+		"personal_blaster.personal_blaster.doctype.email_post.email_post.send_email_to_leads_or_contacts",
+		"personal_blaster.personal_blaster.doctype.whatsapp_post.whatsapp_post.process_scheduled_whatsapp_message",
+		"personal_blaster.personal_blaster.doctype.client.client.upload_all_contacts"
+
+	],
+}
 #	"daily": [
 #		"personal_blaster.tasks.daily"
 #	],

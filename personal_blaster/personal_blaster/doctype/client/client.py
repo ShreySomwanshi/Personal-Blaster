@@ -98,24 +98,24 @@ class Client(Document):
 
 
 #	Syncing Contact to messagebird
-	@frappe.whitelist()
-	def upload_all_contacts(self):
+#	@frappe.whitelist()
+#	def upload_all_contacts(self):
 
-		unuploaded_client_list = frappe.get_list('Client',filters={'contact_status':'NOT UPLOADED'},as_list=1)
+#		unuploaded_client_list = frappe.get_list('Client',filters={'contact_status':'NOT UPLOADED'},as_list=1)
 
 
-		for i in range(len(unuploaded_client_list)):
-			try:
+#		for i in range(len(unuploaded_client_list)):
+#			try:
 
 #				contact = frappe.get_doc('Customer',contact_list[i])
 #				token_doc = frappe.get_doc('Whatsapp Setting')
 #				token = token_doc.get_password('access_token')
 
-				client_doc = frappe.get_doc('Client',unuploaded_client_list[i][0])
-				number_id = client_doc.upload_to_messagebird()
+#				client_doc = frappe.get_doc('Client',unuploaded_client_list[i][0])
+#				number_id = client_doc.upload_to_messagebird()
 
 #				id_data = self.upload_to_messagebird(contact.mobile_no,contact.customer_name,token)
-				number_id = json.loads(number_id)['id']
+#				number_id = json.loads(number_id)['id']
 #				if number_id:
 #					client_doc.contact_status = 'UPLOADED'
 #				else:
@@ -125,14 +125,14 @@ class Client(Document):
 #				print(new)
 #				new.customer = contact_list[i]
 #				new.customer_id = number_id
-				print(number_id)
-				print(client_doc.name)
-				print(client_doc.contact_status)
+#				print(number_id)
+#				print(client_doc.name)
+#				print(client_doc.contact_status)
 #				new.insert()
-				print('end')
+#				print('end')
 #				frappe.db.commit()
-			except:
-				pass
+#			except:
+#				pass
 
 	@frappe.whitelist()
 	def upload_to_messagebird(self):
@@ -155,6 +155,7 @@ class Client(Document):
 		except:
 			pass
 		if number_id:
+			# Save the contact_id
 			self.contact_status = 'UPLOADED'
 			frappe.msgprint(_('Contact Uploaded successfully'))
 		else:
@@ -168,3 +169,16 @@ class Client(Document):
 
 
 		return response.text
+
+@frappe.whitelist()
+def upload_all_contacts(self):
+
+	unuploaded_client_list = frappe.get_list('Client',filters={'contact_status':'NOT UPLOADED'},as_list=1)
+
+	for i in range(len(unuploaded_client_list)):
+		try:
+			client_doc = frappe.get_doc('Client',unuploaded_client_list[i][0])
+			number_id = client_doc.upload_to_messagebird()
+			number_id = json.loads(number_id)['id']
+		except:
+			pass

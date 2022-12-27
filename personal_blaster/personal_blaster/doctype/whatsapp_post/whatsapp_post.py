@@ -13,7 +13,7 @@ from frappe.model.document import Document
 
 class WhatsappPost(Document):
 	def validate(self):
-		if self.scheduled_time:
+		if self.scheduled_time and self.post_status != 'Posted':
 			current_time = frappe.utils.now_datetime()
 			scheduled_time = frappe.utils.get_datetime(self.scheduled_time)
 			if scheduled_time < current_time:
