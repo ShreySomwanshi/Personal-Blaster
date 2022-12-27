@@ -13,44 +13,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Whatsapp",
-   "link_count": 3,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Whatsapp Post",
-   "link_count": 0,
-   "link_to": "Whatsapp Post",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Whatsapp Template",
-   "link_count": 0,
-   "link_to": "Whatsapp Template",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Whatsapp Setting",
-   "link_count": 0,
-   "link_to": "Whatsapp Setting",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Client",
    "link_count": 7,
    "onboard": 0,
@@ -173,9 +135,57 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Whatsapp",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Whatsapp Post",
+   "link_count": 0,
+   "link_to": "Whatsapp Post",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Whatsapp Template",
+   "link_count": 0,
+   "link_to": "Whatsapp Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Whatsapp Setting",
+   "link_count": 0,
+   "link_to": "Whatsapp Setting",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Whatsapp Account",
+   "link_count": 0,
+   "link_to": "Whatsapp Account",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2022-12-23 17:42:31.151982",
+ "modified": "2022-12-27 23:33:49.798646",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Personal Blaster",

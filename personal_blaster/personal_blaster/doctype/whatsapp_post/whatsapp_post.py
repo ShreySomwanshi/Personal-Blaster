@@ -162,5 +162,4 @@ def process_scheduled_whatsapp_message():
 				whatsapp_post = frappe.get_doc("Whatsapp Post", post.name)
 				print(whatsapp_post.name)
 				whatsapp_post.message_post()
-			else:
-				return post_time,start,end
+

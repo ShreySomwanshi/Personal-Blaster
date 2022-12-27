@@ -36,12 +36,14 @@
   {
    "fieldname": "recipient",
    "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
    "label": "Recipient",
    "options": "email_campaign_for"
   },
   {
    "fieldname": "sender",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Sender",
    "options": "Email Account"
   },
@@ -63,13 +65,16 @@
   {
    "fieldname": "end_date",
    "fieldtype": "Datetime",
-   "label": "End Date"
+   "label": "End Date",
+   "read_only": 1
   },
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
-   "options": "\nScheduled\nIn Progress\nCompleted\nUnsubscribed"
+   "options": "\nScheduled\nIn Progress\nCompleted\nUnsubscribed",
+   "read_only": 1
   },
   {
    "default": "0",
@@ -86,7 +91,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-27 18:26:27.017423",
+ "modified": "2022-12-27 23:35:52.899367",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Email Post",
