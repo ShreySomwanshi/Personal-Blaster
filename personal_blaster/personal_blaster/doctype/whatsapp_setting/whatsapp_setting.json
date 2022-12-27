@@ -9,26 +9,13 @@
  "engine": "InnoDB",
  "field_order": [
   "title",
-  "access_token",
-  "whatsapp_account_section",
-  "whatsapp_sender"
+  "access_token"
  ],
  "fields": [
   {
    "fieldname": "title",
    "fieldtype": "Data",
    "label": "Account Name"
-  },
-  {
-   "fieldname": "whatsapp_account_section",
-   "fieldtype": "Section Break",
-   "label": "Whatsapp Account"
-  },
-  {
-   "fieldname": "whatsapp_sender",
-   "fieldtype": "Table",
-   "label": "Whatsapp Sender",
-   "options": "Whatsapp Account"
   },
   {
    "fieldname": "access_token",
@@ -39,7 +26,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-12-27 18:23:05.035333",
+ "modified": "2022-12-27 21:39:28.517782",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Whatsapp Setting",
