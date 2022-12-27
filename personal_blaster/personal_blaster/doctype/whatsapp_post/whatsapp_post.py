@@ -148,16 +148,15 @@ def process_scheduled_whatsapp_message():
 	)
 	print(posts)
 	start = frappe.utils.now_datetime() - datetime.timedelta(minutes=10)
-	end = frappe.utils.now_datetime() + datetime.timedelta(minutes=10)
+#	end = frappe.utils.now_datetime() + datetime.timedelta(minutes=10)
 	for post in posts:
-
 		if post.scheduled_time:
 			print(post)
 			post_time = frappe.utils.get_datetime(post.scheduled_time)
 			print(type(post_time))
 			print(type(start))
 			print(type(end))
-			if post_time > start and post_time <= end:
+			if post_time > start:
 				print('time pass')
 				whatsapp_post = frappe.get_doc("Whatsapp Post", post.name)
 				print(whatsapp_post.name)
