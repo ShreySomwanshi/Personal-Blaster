@@ -54,6 +54,8 @@ class WhatsappPost(Document):
 			print('loop0')
 			client = frappe.get_doc('Client',entry.client_member)
 			number = client.mobile_no
+			print(number)
+			print(client.contact_status)
 			if not number or client.contact_status != 'UPLOADED':
 				continue
 #			number = frappe.get_value('Client',((frappe.get_doc('Contact Group Member',entry.get('contacts'))).contact),'mobile_no')
@@ -106,7 +108,11 @@ class WhatsappPost(Document):
 			'Authorization': f'AccessKey {messagebird_token}',
 			'Content-Type': 'application/json'
 			}
-
+		print('/n/n')
+		print(url)
+		print(headers)
+		print(payload)
+		print('/n/n')
 		response = requests.request("POST", url, headers=headers, data=payload)
 		print(response.text)
 		return response.text
@@ -114,7 +120,7 @@ class WhatsappPost(Document):
 		hsm_body = {"namespace":"5ba2d0b7_f2c6_433b_a66e_57b009ceb6ff","templateName": message,"language": {"policy": "deterministic","code": "en"}}
 #		placeholders = frappe.db.get_list('Whatsapp Placeholder',filters={"parent":message},fields=["field"],as_list = 1)
 		placeholders = frappe.db.get_list("Whatsapp Template",filters={'temp_name':message},fields=["`tabWhatsapp Placeholder`.`field`"],as_list =1)
-		if not placeholders:
+		if not placeholders[0][0]:
 			return hsm_body
 		param_list = []
 		for i in range(len(placeholders)):

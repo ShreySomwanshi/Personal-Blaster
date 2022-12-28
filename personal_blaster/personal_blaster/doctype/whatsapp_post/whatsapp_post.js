@@ -9,8 +9,8 @@ frappe.ui.form.on('Whatsapp Post', {
 		if (frm.doc.post_status !== 'Posted')
 		frm.add_custom_button(__('Posts Now'), function() {
                         frappe.call({
-                               // doc: frm.doc,
-                                method: 'personal_blaster.personal_blaster.doctype.whatsapp_post.whatsapp_post.process_scheduled_whatsapp_message',
+                                doc: frm.doc,
+                                method: 'message_post',
                                 freeze: true,
                                 callback: function() {
                                         frm.reload_doc();

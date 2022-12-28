@@ -18,7 +18,20 @@ class ClientGroup(Document):
 #		filter_list = [set(city_list),set(interest_list),set(country_list)]
 
 		if self.interest:
-			interest_list = frappe.db.get_list('Interests',filters={'Interest':self.interest},fields=['parent'],as_list=1)
+
+			interests = frappe.db.get_list('Client',fields=['name','`tabInterests`.`Interest`'],as_list=1)
+			in_list = []
+			for i in interests:
+				in_list.append(list(i))
+			interest_list = []
+			for i in in_list:
+				if i[1] == self.interest:
+					value = []
+					value.append(i[0])
+					interest_list.append(tuple(value))
+			interest_list = tuple(interest_list)
+
+
 		if self.city:
 			city_list = frappe.db.get_list('Client',filters={'City':self.city},as_list=1)
 		if self.country:

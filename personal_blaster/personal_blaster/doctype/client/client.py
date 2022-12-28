@@ -150,6 +150,7 @@ class Client(Document):
 
 		response = requests.request("POST", url, headers=headers, data=payload)
 		print(response.text)
+		number_id = None
 		try:
 			number_id = json.loads(response.text)['id']
 		except:
@@ -179,6 +180,7 @@ def upload_all_contacts():
 		try:
 			client_doc = frappe.get_doc('Client',unuploaded_client_list[i][0])
 			number_id = client_doc.upload_to_messagebird()
-			number_id = json.loads(number_id)['id']
+			#number_id = json.loads(number_id)['id']
 		except:
 			pass
+#1
