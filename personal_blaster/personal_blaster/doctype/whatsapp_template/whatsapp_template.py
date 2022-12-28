@@ -37,7 +37,7 @@ class WhatsappTemplate(Document):
 		name = self.temp_name
 		syntax = r"(?:[a-z]|[0-9]|[_])+"
 		result = re.findall(syntax,name)
-		if len(result) >0 or result[0] != name:
+		if len(result) >1 or result[0] != name:
 			frappe.throw(_("Name should contain lowercase letters, numbers and underscores only"))
 
 	def get_status(self):
