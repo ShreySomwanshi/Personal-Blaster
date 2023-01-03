@@ -58,18 +58,20 @@ class Client(Document):
 		doc.save()
 		if self.mobile_no or self.email_id:
 			if self.linked_address:
+				print('link')
 				contact_doc = frappe.get_doc("Contact",self.linked_contact)
-
 			elif frappe.db.exists("Contact",{"email_id":self.email_id}):
+				print('email')
 				contact_doc = frappe.get_doc("Contact",frappe.db.exists("Contact",{"email_id":self.email_id}))
 
 			elif frappe.db.exists("Contact",{"mobile_no":self.mobile_no}):
+				print('mobile')
 				contact_doc = frappe.get_doc("Contact",frappe.db.exists("Contact",{"mobile_no":self.mobile_no}))
-
 			else:
+				print('new')
 				contact_doc = frappe.new_doc('Contact')
-
 			contact_doc.first_name = self.customer_name
+
 			if contact_doc.mobile_no:
 				frappe.db.delete('Contact Phone',{"parent":contact_doc.name})
 				contact_doc.mobile_no = None
@@ -77,15 +79,15 @@ class Client(Document):
 			if contact_doc.email_id:
 				frappe.db.delete('Contact Email',{"parent":contact_doc.name})
 				contact_doc.email_id = None
-
-			contact_doc.reload()
+			print('1')
+#			contact_doc.reload()
 			contact_doc.save()
 			contact_doc.reload()
 			if self.mobile_no:
 				contact_doc.append("phone_nos",{"phone":self.mobile_no,"is_primary_mobile_no":1})
 			if self.email_id:
 				contact_doc.append("email_ids",{"email_id":self.email_id,"is_primary":1})
-
+			print('2')
 			contact_doc.append("links",{"link_doctype":"Customer","link_name":doc.name})
 			contact_doc.save()
 
@@ -94,17 +96,17 @@ class Client(Document):
 			doc.reload()
 			doc.customer_primary_contact = contact_doc.name
 			doc.save()
-
+			print('3')
 
 		if self.add_1:
 			if self.linked_address:
 				add_doc = frappe.get_doc("Address",self.linked_address)
 
-			elif frappe.db.exists("Address",f"{self.customer_name}-Billing"):
+			elif frappe.db.exists("Address",f"{self.name}-Billing"):
 				add_doc = frappe.get_doc("Address",f"{self.customer_name}-Billing")
 			else:
 				add_doc = frappe.new_doc("Address")
-			add_doc.address_title = self.customer_name
+			add_doc.address_title = self.name
 			add_doc.address_line1 = self.add_1
 			add_doc.address_line2 = self.add_2
 			add_doc.city = self.city
@@ -131,7 +133,7 @@ class Client(Document):
 #		self.set_primary_email()
 #		self.set_primary("phone")
 #		self.set_primary("mobile_no")
-#s		self.contact()
+#		self.contact()
 #		self.update_messagebird()
 	def set_primary_email(self):
 		if not self.email_ids:
