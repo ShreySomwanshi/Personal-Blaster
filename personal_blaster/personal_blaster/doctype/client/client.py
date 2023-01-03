@@ -44,10 +44,10 @@ class Client(Document):
 		if self.linked_customer:
 			doc = frappe.get_doc("Customer",self.linked_customer)
 
-		elif frappe.db.exists("Customer",{"email_id":self.email_id}):
+		elif self.email_id and frappe.db.exists("Customer",{"email_id":self.email_id}):
 			doc = frappe.get_doc("Customer",frappe.db.exists("Customer",{"email_id":self.email_id}))
 
-		elif frappe.db.exists("Customer",{"mobile_no":self.mobile_no}):
+		elif self.mobile_no and frappe.db.exists("Customer",{"mobile_no":self.mobile_no}):
 			doc = frappe.get_doc("Customer",frappe.db.exists("Customer",{"mobile_no":self.mobile_no}))
 
 		else:
@@ -226,7 +226,7 @@ class Client(Document):
 		}
 		return headers
 	def update_to_messagebird(self):
-		if self.contact_status == "UPLOADED" and self.mobile_no:
+		if self.contact_status == "UPLOADED" and self.mobile_no and self.client_id:
 			url = self.messagebird_url() + self.client_id
 			headers = self.get_header()
 			print(headers)
