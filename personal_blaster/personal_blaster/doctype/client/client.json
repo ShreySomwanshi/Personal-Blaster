@@ -1,6 +1,5 @@
 {
  "actions": [],
- "allow_rename": 1,
  "creation": "2022-11-24 18:59:34.051763",
  "default_view": "List",
  "doctype": "DocType",
@@ -36,8 +35,7 @@
   {
    "fieldname": "customer_name",
    "fieldtype": "Data",
-   "label": "Customer Name",
-   "unique": 1
+   "label": "Customer Name"
   },
   {
    "fieldname": "contact_details_section",
@@ -180,7 +178,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-01-03 16:38:46.333532",
+ "modified": "2023-01-03 21:19:47.102632",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Client",

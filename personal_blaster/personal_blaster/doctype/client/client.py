@@ -7,13 +7,37 @@ from frappe.model.document import Document
 from frappe.model.naming import append_number_if_name_exists
 import requests
 import json
-
+from frappe.utils import cint, cstr, flt, get_formatted_email, today
 #messagebird_url = "https://rest.messagebird.com/contacts/"
 class Client(Document):
 	def autoname(self):
-		self.name = self.customer_name
-		if frappe.db.exists("Client", self.name):
-			self.name = append_number_if_name_exists("Client", self.name)
+		self.name = self.get_customer_name()
+
+	def get_customer_name(self):
+
+		if frappe.db.get_value("Client", self.customer_name) and not frappe.flags.in_import:
+			count = frappe.db.sql(
+				"""select ifnull(MAX(CAST(SUBSTRING_INDEX(name, ' ', -1) AS UNSIGNED)), 0) from tabClient
+				 where name like %s""",
+				"%{0} - %".format(self.customer_name),
+				as_list=1,
+			)[0][0]
+			count = cint(count) + 1
+
+			new_customer_name = "{0} - {1}".format(self.customer_name, cstr(count))
+
+			frappe.msgprint(
+				_("Changed customer name to '{}' as '{}' already exists.").format(
+					new_customer_name, self.customer_name
+				),
+				title=_("Note"),
+				indicator="yellow",
+			)
+
+			return new_customer_name
+
+		return self.customer_name
+
 
 	def contact(self):
 		print('update')
