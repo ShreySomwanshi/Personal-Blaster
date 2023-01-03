@@ -246,6 +246,8 @@ class Client(Document):
 			self.delete_from_messagebird()
 
 	def delete_from_messagebird(self):
+		if self.contact_status != 'UPLOADED' and self.client_id:
+			return
 		url = self.messagebird_url() + self.client_id
 		headers = self.get_header()
 		payload =""
