@@ -7,30 +7,76 @@ from frappe.model.document import Document
 from frappe.model.naming import append_number_if_name_exists
 import requests
 import json
+
+#messagebird_url = "https://rest.messagebird.com/contacts/"
 class Client(Document):
 	def autoname(self):
 		self.name = self.customer_name
 		if frappe.db.exists("Client", self.name):
 			self.name = append_number_if_name_exists("Client", self.name)
 
-	def after_insert(self):
-		self.contact()
 	def contact(self):
 		print('update')
-		if frappe.db.exists("Customer",self.customer_name):
-			doc = frappe.get_doc("Customer",self.customer_name)
+		if self.linked_customer:
+			doc = frappe.get_doc("Customer",self.linked_customer)
+
+		elif frappe.db.exists("Customer",{"email_id":self.email_id}):
+			doc = frappe.get_doc("Customer",frappe.db.exists("Customer",{"email_id":self.email_id}))
+
+		elif frappe.db.exists("Customer",{"mobile_no":self.mobile_no}):
+			doc = frappe.get_doc("Customer",frappe.db.exists("Customer",{"mobile_no":self.mobile_no}))
+
 		else:
-			doc = doc = frappe.new_doc('Customer')
+			doc = frappe.new_doc('Customer')
 		doc.customer_name = self.customer_name
 		doc.customer_group = 'Commercial'
 		doc.territory = 'All Territories'
-		doc.mobile_no = self.mobile_no
-		doc.email_id = self.email_id
-		print(doc)
 		doc.save()
+		if self.mobile_no or self.email_id:
+			if self.linked_address:
+				contact_doc = frappe.get_doc("Contact",self.linked_contact)
+
+			elif frappe.db.exists("Contact",{"email_id":self.email_id}):
+				contact_doc = frappe.get_doc("Contact",frappe.db.exists("Contact",{"email_id":self.email_id}))
+
+			elif frappe.db.exists("Contact",{"mobile_no":self.mobile_no}):
+				contact_doc = frappe.get_doc("Contact",frappe.db.exists("Contact",{"mobile_no":self.mobile_no}))
+
+			else:
+				contact_doc = frappe.new_doc('Contact')
+
+			contact_doc.first_name = self.customer_name
+			if contact_doc.mobile_no:
+				frappe.db.delete('Contact Phone',{"parent":contact_doc.name})
+				contact_doc.mobile_no = None
+
+			if contact_doc.email_id:
+				frappe.db.delete('Contact Email',{"parent":contact_doc.name})
+				contact_doc.email_id = None
+
+			contact_doc.reload()
+			contact_doc.save()
+			contact_doc.reload()
+			if self.mobile_no:
+				contact_doc.append("phone_nos",{"phone":self.mobile_no,"is_primary_mobile_no":1})
+			if self.email_id:
+				contact_doc.append("email_ids",{"email_id":self.email_id,"is_primary":1})
+
+			contact_doc.append("links",{"link_doctype":"Customer","link_name":doc.name})
+			contact_doc.save()
+
+			if not self.linked_contact:
+				self.db_set('linked_contact',contact_doc.name)
+			doc.reload()
+			doc.customer_primary_contact = contact_doc.name
+			doc.save()
+
 
 		if self.add_1:
-			if frappe.db.exists("Address",f"{self.customer_name}-Billing"):
+			if self.linked_address:
+				add_doc = frappe.get_doc("Address",self.linked_address)
+
+			elif frappe.db.exists("Address",f"{self.customer_name}-Billing"):
 				add_doc = frappe.get_doc("Address",f"{self.customer_name}-Billing")
 			else:
 				add_doc = frappe.new_doc("Address")
@@ -41,13 +87,28 @@ class Client(Document):
 			add_doc.state = self.state
 			add_doc.country = self.country
 			add_doc.pincode = self.pincode
+			add_doc.append("links",{"link_doctype":"Customer","link_name":doc.name})
+
 			add_doc.save()
+			if not self.linked_address:
+				self.db_set('linked_address',add_doc.name)
+			doc.reload()
+			doc.customer_primary_address = add_doc.name
+			doc.save()
+
+
+		if not self.linked_customer:
+			self.db_set('linked_customer',doc.name)
+
 		print('DONE')
 	def validate(self):
-		self.set_primary_email()
-		self.set_primary("phone")
-		self.set_primary("mobile_no")
+		pass
+#		print('validate')
+#		self.set_primary_email()
+#		self.set_primary("phone")
+#		self.set_primary("mobile_no")
 #s		self.contact()
+#		self.update_messagebird()
 	def set_primary_email(self):
 		if not self.email_ids:
 			self.email_id = ""
@@ -93,83 +154,92 @@ class Client(Document):
 
 	def on_update(self):
 		# Update customer and contact
-		pass
+		print('update')
+		self.update_to_messagebird()
+		self.contact()
 
-
-
-#	Syncing Contact to messagebird
-#	@frappe.whitelist()
-#	def upload_all_contacts(self):
-
-#		unuploaded_client_list = frappe.get_list('Client',filters={'contact_status':'NOT UPLOADED'},as_list=1)
-
-
-#		for i in range(len(unuploaded_client_list)):
-#			try:
-
-#				contact = frappe.get_doc('Customer',contact_list[i])
-#				token_doc = frappe.get_doc('Whatsapp Setting')
-#				token = token_doc.get_password('access_token')
-
-#				client_doc = frappe.get_doc('Client',unuploaded_client_list[i][0])
-#				number_id = client_doc.upload_to_messagebird()
-
-#				id_data = self.upload_to_messagebird(contact.mobile_no,contact.customer_name,token)
-#				number_id = json.loads(number_id)['id']
-#				if number_id:
-#					client_doc.contact_status = 'UPLOADED'
-#				else:
-#					client_doc.contact_status = 'ERROR'
-#				client_doc.save()
-#				new = frappe.new_doc('Sync contact')
-#				print(new)
-#				new.customer = contact_list[i]
-#				new.customer_id = number_id
-#				print(number_id)
-#				print(client_doc.name)
-#				print(client_doc.contact_status)
-#				new.insert()
-#				print('end')
-#				frappe.db.commit()
-#			except:
-#				pass
 
 	@frappe.whitelist()
 	def upload_to_messagebird(self):
+#		token_doc = frappe.get_doc('Whatsapp Setting')
+#		token = token_doc.get_password('access_token')
+#		if not token:
+#			frappe.throw(_('Access token is not Configured'))
+		url = self.messagebird_url()
+
+		payload=json.dumps({
+			'msisdn':self.mobile_no,'firstName':self.customer_name
+		})
+		headers = self.get_header()
+
+		response = requests.request("POST", url, headers=headers, data=payload)
+		print(response.text)
+
+		try:
+			messagebird_contact_id = json.loads(response.text)['id']
+			self.db_set("client_id",messagebird_contact_id)
+			self.db_set("contact_status","UPLOADED")
+			frappe.msgprint(_("Contact Uploaded successfully"))
+		except:
+
+			self.contact_status = 'ERROR'
+			frappe.msgprint(_('Error in uploading contact'))
+
+		#print(headers)
+		return response.text
+
+	def get_header(self):
 		token_doc = frappe.get_doc('Whatsapp Setting')
 		token = token_doc.get_password('access_token')
 		if not token:
 			frappe.throw(_('Access token is not Configured'))
-		url = "https://rest.messagebird.com/contacts"
 
-		payload=f'msisdn={self.mobile_no}&firstName={self.customer_name}'
 		headers = {
 		  'Authorization': f'AccessKey {token}',
-		  'Content-Type': 'application/x-www-form-urlencoded'
+		  'Content-Type': 'application/json'
 		}
+		return headers
+	def update_to_messagebird(self):
+		if self.contact_status == "UPLOADED" and self.mobile_no:
+			url = self.messagebird_url() + self.client_id
+			headers = self.get_header()
+			print(headers)
+			payload = ""
+			response = requests.request("GET",url,headers=headers,data = payload)
+			msisdn = json.loads(response.text)
+#['msisdn']
+			if msisdn == self.mobile_no:
+				pass
+			else:
+				payload = json.dumps({
+					'msisdn':self.mobile_no
+				})
+				response = requests.request("PATCH", url, headers=headers, data=payload)
+				print('Contact Updated')
+		elif not self.mobile_no and self.contact_status == "UPLOADED":
+			self.delete_from_messagebird()
 
-		response = requests.request("POST", url, headers=headers, data=payload)
+	def delete_from_messagebird(self):
+		url = self.messagebird_url() + self.client_id
+		headers = self.get_header()
+		payload =""
+		response = requests.request("DELETE",url,headers=headers,data = payload)
+		if response.text:
+			frappe.throw(_('Problem is Deleting the Client'))
 		print(response.text)
-		number_id = None
-		try:
-			number_id = json.loads(response.text)['id']
-		except:
-			pass
-		if number_id:
-			# Save the contact_id
-			self.contact_status = 'UPLOADED'
-			frappe.msgprint(_('Contact Uploaded successfully'))
-		else:
-			self.contact_status = 'ERROR'
-			frappe.msgprint(_('Error in uploading contact'))
+		self.db_set('contact_status','NOT UPLOADED')
+		self.db_set('client_id','')
+		print('Contact Deleted')
 
-		self.save()
+	def on_trash(self):
+		self.delete_from_messagebird()
 
-		#print(headers)
+	def messagebird_url(self):
+		messagebird_url = "https://rest.messagebird.com/contacts/"
+		return messagebird_url
 
 
 
-		return response.text
 
 @frappe.whitelist()
 def upload_all_contacts():
@@ -183,4 +253,42 @@ def upload_all_contacts():
 			#number_id = json.loads(number_id)['id']
 		except:
 			pass
-#1
+
+def update_all_client():
+	import datetime
+	contacts = frappe.db.get_list('Contact',fields=['name','modified'])
+
+	print('List of Contacts')
+	print(contacts)
+	print('\n\n')
+	for contact in contacts:
+#		print(f'Contact: {contact}')
+#		print('\n')
+		if contact['modified'] > frappe.utils.now_datetime() - datetime.timedelta(minutes = 65):
+			print(f'{contact} modified')
+			client_modified = frappe.db.get_value('Client',{'linked_contact':contact['name']},'modified')
+			print(client_modified)
+			if client_modified and contact['modified'] > client_modified:
+				client_name = frappe.db.get_value('Client',{'linked_contact':contact['name']},'name')
+
+				print(client_name)
+				frappe.db.set_value('Client',client_name,'mobile_no',frappe.db.get_value('Contact',contact['name'],'mobile_no'))
+				frappe.db.set_value('Client',client_name,'email_id',frappe.db.get_value('Contact',contact['name'],'email_id'))
+				frappe.db.commit()
+				client = frappe.get_doc('Client',client_name)
+				client.update_to_messagebird()
+
+	addresses = frappe.db.get_list('Address',fields=['name','modified'])
+	for address in addresses:
+		if address['modified'] > frappe.utils.now_datetime() - datetime.timedelta(hours=6):
+			client_modified = frappe.db.get_value('Client',{'linked_address':address['name']},'modified')
+			if client_modified and address['modified'] > client_modified:
+
+				client_name = frappe.db.get_value('Client',{'linked_address':contact['name']},'name')
+				frappe.db.set_value('Client',client_name,'add_1',frappe.db.get_value('Address',address['name'],'address_line1'))
+				frappe.db.set_value('Client',client_name,'add_2',frappe.db.get_value('Address',address['name'],'address_line2'))
+				frappe.db.set_value('Client',client_name,'city',frappe.db.get_value('Address',address['name'],'city'))
+				frappe.db.set_value('Client',client_name,'state',frappe.db.get_value('Address',address['name'],'state'))
+				frappe.db.set_value('Client',client_name,'country',frappe.db.get_value('Address',address['name'],'country'))
+				frappe.db.set_value('Client',client_name,'pincode',frappe.db.get_value('Address',address['name'],'pincode'))
+				frappe.db.commit()

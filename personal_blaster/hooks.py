@@ -122,20 +122,20 @@ scheduler_events = {
 		"personal_blaster.personal_blaster.doctype.client.client.upload_all_contacts",
 		"personal_blaster.personal_blaster.doctype.email_post.email_post.set_email_campaign_status"
 	],
-}
+#}
 #	"daily": [
 #		"personal_blaster.tasks.daily"
 #	],
-#	"hourly": [
-#		"personal_blaster.tasks.hourly"
-#	],
+	"hourly": [
+		"personal_blaster.personal_blaster.doctype.client.client.update_all_client"
+	],
 #	"weekly": [
 #		"personal_blaster.tasks.weekly"
 #	],
 #	"monthly": [
 #		"personal_blaster.tasks.monthly"
 #	],
-#}
+}
 
 # Testing
 # -------

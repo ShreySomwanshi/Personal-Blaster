@@ -29,6 +29,7 @@
    "fieldname": "message",
    "fieldtype": "Text",
    "label": "Template",
+   "reqd": 1,
    "set_only_once": 1
   },
   {
@@ -72,7 +73,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-27 18:11:41.664611",
+ "modified": "2023-01-02 21:03:57.335282",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Whatsapp Template",

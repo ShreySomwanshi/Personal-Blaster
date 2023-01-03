@@ -14,13 +14,14 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Interest",
-   "options": "Client Interest"
+   "options": "Client Interest",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-01 22:22:12.554825",
+ "modified": "2023-01-02 21:05:19.454265",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Interests",

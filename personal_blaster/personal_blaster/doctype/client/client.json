@@ -9,6 +9,7 @@
  "field_order": [
   "customer_name",
   "contact_status",
+  "client_id",
   "phone",
   "mobile_no",
   "email_id",
@@ -23,6 +24,10 @@
   "phone_nos",
   "email_ids",
   "interests",
+  "linked_doctype_section",
+  "linked_customer",
+  "linked_contact",
+  "linked_address",
   "messages_section",
   "whatsapp_messages",
   "sms_messages"
@@ -37,47 +42,46 @@
   {
    "fieldname": "contact_details_section",
    "fieldtype": "Section Break",
-   "label": "Contact Details"
+   "label": "Client Interest"
   },
   {
    "fieldname": "phone_nos",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Contact Numbers",
    "options": "Contact Phone"
   },
   {
    "fieldname": "email_ids",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Email IDs",
    "options": "Contact Email"
   },
   {
    "fieldname": "interests",
    "fieldtype": "Table",
-   "label": "Interests",
    "options": "Interests"
   },
   {
    "fieldname": "mobile_no",
    "fieldtype": "Data",
-   "label": "Mobile no",
-   "read_only": 1
+   "label": "Mobile no"
   },
   {
    "fieldname": "email_id",
    "fieldtype": "Data",
-   "label": "Email ID",
-   "read_only": 1
+   "label": "Email ID"
   },
   {
    "fieldname": "address_column",
-   "fieldtype": "Column Break",
-   "label": "Address"
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "add_1",
    "fieldtype": "Data",
-   "label": "Address line no 1"
+   "label": "Address line no 1",
+   "mandatory_depends_on": "eval:doc.country || doc.city"
   },
   {
    "fieldname": "add_2",
@@ -88,12 +92,14 @@
    "fieldname": "city",
    "fieldtype": "Link",
    "label": "City",
+   "mandatory_depends_on": "eval:doc.country || doc.add_1",
    "options": "City"
   },
   {
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
+   "mandatory_depends_on": "eval:doc.city || doc.add_1",
    "options": "Country"
   },
   {
@@ -138,11 +144,43 @@
    "fieldname": "state",
    "fieldtype": "Data",
    "label": "State/Province"
+  },
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "client_id"
+  },
+  {
+   "fieldname": "linked_doctype_section",
+   "fieldtype": "Section Break",
+   "label": "Linked Doctype"
+  },
+  {
+   "fieldname": "linked_customer",
+   "fieldtype": "Link",
+   "label": "Linked Customer",
+   "options": "Customer",
+   "unique": 1
+  },
+  {
+   "fieldname": "linked_contact",
+   "fieldtype": "Link",
+   "label": "Linked Contact",
+   "options": "Contact",
+   "unique": 1
+  },
+  {
+   "fieldname": "linked_address",
+   "fieldtype": "Link",
+   "label": "Linked Address",
+   "options": "Address",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-27 18:24:52.501845",
+ "modified": "2023-01-03 16:38:46.333532",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Client",
