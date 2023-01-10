@@ -3,7 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
-
+from frappe import _
 class ClientGroup(Document):
 
 	def validate(self):
@@ -15,7 +15,8 @@ class ClientGroup(Document):
 		city_list = {}
 		interest_list = {}
 		country_list = {}
-#		filter_list = [set(city_list),set(interest_list),set(country_list)]
+
+		filter_list = []
 
 		if self.interest:
 
@@ -30,15 +31,16 @@ class ClientGroup(Document):
 					value.append(i[0])
 					interest_list.append(tuple(value))
 			interest_list = tuple(interest_list)
-
+			filter_list.append(set(interest_list))
 
 		if self.city:
 			city_list = frappe.db.get_list('Client',filters={'City':self.city},as_list=1)
+			filter_list.append(set(city_list))
 		if self.country:
 			country_list = frappe.db.get_list('Client',filters={'Country':self.country},as_list=1)
-
-		filter_list = [set(city_list),set(interest_list),set(country_list)]
-		non_empty_list = [x for x in filter_list if x]
+			filter_list.append(set(country_list))
+#		filter_list = [set(city_list),set(interest_list),set(country_list)]
+		non_empty_list = [x for x in filter_list]
 		print(non_empty_list)
 		if not non_empty_list:
 			frappe.throw((f'No contacts added'))
