@@ -9,31 +9,14 @@
  "engine": "InnoDB",
  "field_order": [
   "title",
-  "interest",
-  "city",
-  "country",
+  "interest_logic",
+  "interests",
+  "cities",
+  "countries",
   "client_members_section",
   "clients"
  ],
  "fields": [
-  {
-   "fieldname": "interest",
-   "fieldtype": "Link",
-   "label": "Interest",
-   "options": "Client Interest"
-  },
-  {
-   "fieldname": "city",
-   "fieldtype": "Link",
-   "label": "City",
-   "options": "City"
-  },
-  {
-   "fieldname": "country",
-   "fieldtype": "Link",
-   "label": "Country",
-   "options": "Country"
-  },
   {
    "fieldname": "client_members_section",
    "fieldtype": "Section Break",
@@ -50,11 +33,38 @@
    "fieldtype": "Data",
    "label": "Title",
    "unique": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "interests",
+   "fieldtype": "Table",
+   "label": "Interests",
+   "options": "interest child"
+  },
+  {
+   "columns": 2,
+   "fieldname": "cities",
+   "fieldtype": "Table",
+   "label": "Cities",
+   "options": "city child"
+  },
+  {
+   "columns": 2,
+   "fieldname": "countries",
+   "fieldtype": "Table",
+   "label": "Countries",
+   "options": "country child"
+  },
+  {
+   "fieldname": "interest_logic",
+   "fieldtype": "Select",
+   "label": "Interest Logic",
+   "options": "OR\nAND"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-27 18:21:13.696377",
+ "modified": "2023-01-27 22:06:07.660996",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Client Group",
