@@ -12,6 +12,9 @@
   "phone",
   "mobile_no",
   "email_id",
+  "industry",
+  "market_segment",
+  "job_title",
   "address_column",
   "add_1",
   "add_2",
@@ -174,11 +177,29 @@
    "label": "Linked Address",
    "options": "Address",
    "unique": 1
+  },
+  {
+   "fieldname": "industry",
+   "fieldtype": "Link",
+   "label": "Industry",
+   "options": "Industry Type"
+  },
+  {
+   "fieldname": "market_segment",
+   "fieldtype": "Link",
+   "label": "Market Segment",
+   "options": "Market Segment"
+  },
+  {
+   "fieldname": "job_title",
+   "fieldtype": "Link",
+   "label": "Job Title",
+   "options": "Job Title"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-01-03 21:36:13.520714",
+ "modified": "2023-02-01 21:53:31.474065",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Client",

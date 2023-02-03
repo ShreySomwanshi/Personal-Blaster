@@ -9,10 +9,14 @@
  "engine": "InnoDB",
  "field_order": [
   "title",
+  "filter_logic",
   "interest_logic",
   "interests",
   "cities",
   "countries",
+  "industry",
+  "market_segment",
+  "job_title",
   "client_members_section",
   "clients"
  ],
@@ -58,13 +62,39 @@
   {
    "fieldname": "interest_logic",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Interest Logic",
    "options": "OR\nAND"
+  },
+  {
+   "default": "AND",
+   "fieldname": "filter_logic",
+   "fieldtype": "Select",
+   "label": "Filter Logic",
+   "options": "AND\nOR"
+  },
+  {
+   "fieldname": "industry",
+   "fieldtype": "Table",
+   "label": "Industry",
+   "options": "Industry"
+  },
+  {
+   "fieldname": "market_segment",
+   "fieldtype": "Table",
+   "label": "Market Segment",
+   "options": "MarketSegment"
+  },
+  {
+   "fieldname": "job_title",
+   "fieldtype": "Table",
+   "label": "Job Title",
+   "options": "Job Title child"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-01-27 22:06:07.660996",
+ "modified": "2023-02-01 22:31:51.880295",
  "modified_by": "Administrator",
  "module": "Personal Blaster",
  "name": "Client Group",
