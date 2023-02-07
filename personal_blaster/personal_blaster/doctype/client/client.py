@@ -320,3 +320,4 @@ def update_all_client():
 				frappe.db.set_value('Client',client_name,'country',frappe.db.get_value('Address',address['name'],'country'))
 				frappe.db.set_value('Client',client_name,'pincode',frappe.db.get_value('Address',address['name'],'pincode'))
 				frappe.db.commit()
+# hi
